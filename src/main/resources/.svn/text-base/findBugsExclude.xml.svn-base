@@ -1,5 +1,0 @@
-<FindBugsFilter>
-	<Match>
-		<Bug code="Se,SnVI" />
-	</Match>
-</FindBugsFilter>

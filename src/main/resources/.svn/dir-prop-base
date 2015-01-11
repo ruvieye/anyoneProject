@@ -1,9 +1,0 @@
-K 10
-svn:ignore
-V 52
-.settings
-.externalToolBuilders
-target
-.springBeans
-
-END
