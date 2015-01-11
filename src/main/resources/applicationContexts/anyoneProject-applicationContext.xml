@@ -11,6 +11,7 @@
 	<!-- annotatation 기반 설정 사용 선언 -->
 	<mvc:annotation-driven />
 
+
 	<!-- annotation 기반 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.project.anyone"
 		use-default-filters="false">
