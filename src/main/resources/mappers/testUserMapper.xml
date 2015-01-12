@@ -4,15 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.project.anyone">
-	<select id="selectTestUserList" parameterType="java.util.HashMap"
-		resultType="java.util.HashMap">
-		SELECT * FROM test_user
-	</select>
+		<select id="selectTestUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+				SELECT * FROM test_user
+		</select>
 
-	<insert id="insertTestUser" parameterType="java.util.HashMap">
-		insert into test_user
-		( usr_id, usr_nm, dept_cd, del_yn)
-		values
-		( 'keroro', '손희수', '100', 'N' )
-	</insert>
+		<insert id="insertTestUser" parameterType="java.util.HashMap">
+				insert into test_user
+				( usr_id, usr_nm, dept_cd, del_yn)
+				values
+				( 'keroro', '손희수', '100', 'N' )
+		</insert>
 </mapper>
