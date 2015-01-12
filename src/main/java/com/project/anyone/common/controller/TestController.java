@@ -22,7 +22,7 @@ public class TestController {
     HashMap<String, String> input = new HashMap<String, String>();
     List<HashMap<String, String>> outputs = sqlSession.selectList("com.project.anyone.selectTestUserList", input);
     System.out.print(outputs.toString());
-    
+    model.addAttribute("list", outputs);
     return "hello";
   }
   
