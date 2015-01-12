@@ -4,9 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.project.anyone">
-    <select id="selectTestUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        SELECT * FROM test_user
+    <select id="selectTestUserTableColumnList" resultType="java.util.HashMap">
+        SELECT column_name
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE table_name = 'test_user'
+        AND table_schema = 'AnyoneProjectDB';
     </select>
+
+    <select id="selectTestUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT *  FROM test_user
+    </select>
+
+
 
     <insert id="insertTestUser" parameterType="java.util.HashMap">
         insert into test_user

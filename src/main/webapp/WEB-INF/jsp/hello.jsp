@@ -6,11 +6,9 @@
     <table border="1">
         <c:forEach var="list" items="${list}">
             <tr>
-                <td>${list.idx}</td>
-                <td>${list.usr_id}</td>
-                <td>${list.usr_nm}</td>
-                <td>${list.dept_cd}</td>
-                <td>${list.del_yn}</td>
+                <c:forEach var="columns" items="${columns}">
+                    <td>${list[columns.column_name]}</td>
+                </c:forEach>
             </tr>
         </c:forEach>
     </table>

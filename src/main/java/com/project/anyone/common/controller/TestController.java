@@ -19,6 +19,9 @@ public class TestController {
   @RequestMapping(value = "/hello", method = RequestMethod.GET)
   public String hello(Locale locale, Model model) {
     
+    List<HashMap<String, String>> columns = sqlSession.selectList("com.project.anyone.selectTestUserTableColumnList");
+    model.addAttribute("columns", columns);
+    
     HashMap<String, String> input = new HashMap<String, String>();
     List<HashMap<String, String>> outputs = sqlSession.selectList("com.project.anyone.selectTestUserList", input);
     System.out.print(outputs.toString());
