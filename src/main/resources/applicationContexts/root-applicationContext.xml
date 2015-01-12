@@ -5,35 +5,35 @@
 			http://www.springframework.org/schema/task 
 			http://www.springframework.org/schema/task/spring-task.xsd">
 
-		<context:component-scan base-package="com">
-				<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-		</context:component-scan>
+    <context:component-scan base-package="com">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
 
 
-		<!-- mysql datasource 한글깨짐을 막기위해 characterEncoding 설정 추가 (mybatis package 내부는 ibatis로군) -->
-		<!-- TODO DB접속정보의 암호화 처리를 위해 외부에서 암호를 주입받는 방식이 필요해 보인다 -->
-		<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
-				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://54.65.53.2:13306/AnyoneProjectDB?characterEncoding=UTF-8" />
-				<property name="username" value="dev-user" />
-				<property name="password" value="rhdqngkwk!1" />
-		</bean>
+    <!-- mysql datasource 한글깨짐을 막기위해 characterEncoding 설정 추가 (mybatis package 내부는 ibatis로군) -->
+    <!-- TODO DB접속정보의 암호화 처리를 위해 외부에서 암호를 주입받는 방식이 필요해 보인다 -->
+    <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+        <property name="driver" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://54.65.53.2:13306/AnyoneProjectDB?characterEncoding=UTF-8" />
+        <property name="username" value="dev-user" />
+        <property name="password" value="rhdqngkwk!1" />
+    </bean>
 
-		<!-- mybatis 연동 -->
-		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-				<property name="dataSource" ref="dataSource" />
-				<property name="configLocation" value="classpath:/configs/mybatis-config.xml" />
-		</bean>
+    <!-- mybatis 연동 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:/configs/mybatis-config.xml" />
+    </bean>
 
-		<!-- datasoure의 트랜잭션매니져 설정 -->
-		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-				<property name="dataSource" ref="dataSource" />
-		</bean>
+    <!-- datasoure의 트랜잭션매니져 설정 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
 
-		<!-- mybatis sqlSession -->
-		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-				<constructor-arg ref="sqlSessionFactory"></constructor-arg>
-		</bean>
+    <!-- mybatis sqlSession -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory"></constructor-arg>
+    </bean>
 
 
 
