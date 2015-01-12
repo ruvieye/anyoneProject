@@ -21,6 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into test_user
         ( usr_id, usr_nm, dept_cd, del_yn)
         values
-        ( 'keroro', '손희수', '100', 'N' )
+        ( 'keroro', 'heesu', '100', 'N' )
     </insert>
 </mapper>

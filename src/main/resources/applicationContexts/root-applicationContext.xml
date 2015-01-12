@@ -14,7 +14,7 @@
     <!-- TODO DB접속정보의 암호화 처리를 위해 외부에서 암호를 주입받는 방식이 필요해 보인다 -->
     <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
         <property name="driver" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://54.65.53.2:13306/AnyoneProjectDB?characterEncoding=UTF-8" />
+        <property name="url" value="jdbc:mysql://54.65.86.98:3306/AnyoneProjectDB?characterEncoding=UTF-8" />
         <property name="username" value="dev-user" />
         <property name="password" value="rhdqngkwk!1" />
     </bean>
