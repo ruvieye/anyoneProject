@@ -7,12 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectTestUserTableColumnList" resultType="java.util.HashMap">
         SELECT column_name
         FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE table_name = 'test_user'
+        WHERE table_name = 'tb_article'
         AND table_schema = 'AnyoneProjectDB';
     </select>
 
     <select id="selectTestUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        SELECT *  FROM test_user
+        SELECT *  FROM tb_article
     </select>
 
 
@@ -21,6 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into test_user
         ( usr_id, usr_nm, dept_cd, del_yn)
         values
-        ( 'keroro', 'heesu', '100', 'N' )
+        ( 'keroro', '손희수', '100', 'N' )
     </insert>
 </mapper>
