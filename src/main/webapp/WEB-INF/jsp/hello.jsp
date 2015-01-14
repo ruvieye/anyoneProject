@@ -10,6 +10,7 @@
 <!-- bootstrap + jquery + respond script -->
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/css/anyoneProject.css">
 <script src="/js/jquery-2.1.3.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -181,7 +182,7 @@
         </blockquote>
 
         <!-- 코드 -->
-        <pre class="pre-scrollable">
+        <pre class="pre-scrollable code">
             <p>t.DispatcherServlet noHandlerFound
 경고: No mapping found for HTTP request with URI [/] in DispatcherServlet with name 'dispatcherServlet'
 [{article_title=1, bbs_no=1, article_no=1, article_content=1, seq=1, user_id=1, reg_datetime=2015-01-15 00:00:00.0, writer=1}, {article_title=2, bbs_no=2, article_no=22, article_content=2, seq=2, user_id=22, reg_datetime=2015-01-16 00:00:00.0, writer=222}]1월 14, 2015 10:27:15 오전 org.apache.jasper.compiler.TldLocationsCache tldScanJar

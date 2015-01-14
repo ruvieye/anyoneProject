@@ -1,0 +1,15 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+/*나눔고딕적용*/
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/*나눔고딕코딩*/
+.code {
+    font-family: 'Nanum Gothic Coding', monospace;
+}
