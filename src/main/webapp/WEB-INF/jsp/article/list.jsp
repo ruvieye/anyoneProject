@@ -28,6 +28,7 @@
                 </thead>
                 <tbody class="table-hover">
                     <c:forEach var="list" items="${articleList}">
+<<<<<<< HEAD
                         <tr id="${list.seq}" class="article_seq">
                             <c:forEach var="columns" items="${articleColumnList}">
                                 <td>${list[columns.column_name]}</td>
@@ -51,6 +52,27 @@
 			$('.article_seq').click(function() {
 			    var seq = $(this).attr('id');
 			    location.href = "/article/" + seq;
+=======
+                        <tr>
+                            <c:forEach var="columns" items="${articleColumnList}">
+                                <td>${list[columns.column_name]}</td>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            <button id="btn_post" type="button" class="btn btn-primary">POST</button>
+        </p>
+
+    </div>
+    <script>
+		    $(document).ready(function() {
+			$('#btn_post').click(function() {
+			    location.href = "/article/post/"
+>>>>>>> refs/remotes/origin/master
 			});
 		    });
 		</script>
