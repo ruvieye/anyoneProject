@@ -28,7 +28,7 @@
                 </thead>
                 <tbody class="table-hover">
                     <c:forEach var="list" items="${articleList}">
-                        <tr>
+                        <tr id="${list.seq}" class="article_seq">
                             <c:forEach var="columns" items="${articleColumnList}">
                                 <td>${list[columns.column_name]}</td>
                             </c:forEach>
@@ -47,6 +47,10 @@
 		    $(document).ready(function() {
 			$('#btn_post').click(function() {
 			    location.href = "/article/post/"
+			});
+			$('.article_seq').click(function() {
+			    var seq = $(this).attr('id');
+			    location.href = "/article/" + seq;
 			});
 		    });
 		</script>

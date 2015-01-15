@@ -15,12 +15,16 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-
-    <!-- view resolver는 나중에 negotiation 으로 변경하도록 하자 -->
-    <!-- bean name 기반 view Resolver -->
-    <bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
-        <property name="order" value="1" />
-    </bean>
+	
+	<!-- jackson2 message converter -->
+	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+		  <list>
+			<ref bean="jsonHttpMessageConverter"/>
+		  </list>
+		</property>
+	</bean>
 
     <!-- url 기반 view Resolver -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

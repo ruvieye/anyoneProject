@@ -32,7 +32,7 @@
                 <form:label path="writer">writer</form:label>
                 <form:input type="text" class="form-control" path="writer" placeholder="sign your name" />
             </div>
-            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+            <button id="submit" type="button" class="btn btn-primary">Submit</button>
             <button id="cancel" type="button" class="btn btn-default">Cancel</button>
         </form:form>
     </div>
@@ -40,7 +40,21 @@
     <script>
 		    $(document).ready(function() {
 			$('#cancel').click(function() {
-			    location.href = "/article/"
+			    location.href = "/article/list"
+			});
+
+			$('#submit').click(function() {
+			    $.ajax({
+				type : "POST",
+				url : "/article/post",
+				data : $("#article").serialize(),
+				success : function(data) {
+				    location.href = "/article/" + data;
+				},
+				error : function() {
+				    alert('err');
+				}
+			    });
 			});
 		    });
 		</script>

@@ -4,6 +4,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 
 <configuration>
+    <typeAliases>
+        <typeAlias type="com.project.anyone.article.model.Article" alias="article" />
+    </typeAliases>
+
     <mappers>
         <mapper resource="/mappers/testUserMapper.xml" />
     </mappers>

@@ -3,24 +3,42 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.project.anyone">
+<mapper namespace="com.project.anyone.article.service.ArticleService">
+
     <select id="selectArticleColumnList" resultType="java.util.HashMap">
         SELECT column_name
         FROM INFORMATION_SCHEMA.COLUMNS
         WHERE table_name = 'tb_article'
-        AND table_schema = 'AnyoneProjectDB';
+        AND table_schema = 'AnyoneProjectDB'
     </select>
 
     <select id="selectArticleList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT * FROM tb_article
     </select>
 
+    <select id="selectArticle" parameterType="long" resultType="article">
+        SELECT
+        seq
+        ,bbs_no as bbsNo
+        ,article_title as articleTitle
+        ,article_content as articleContent
+        ,writer
+        ,user_id as userId
+        ,reg_datetime as registerDatetime
+        ,mod_datetime as modifyDatetime
+        FROM tb_article
+        WHERE seq = #{seq}
+    </select>
 
 
-    <insert id="insertArticle" parameterType="com.project.anyone.article.model.Article">
+    <insert id="insertArticle" parameterType="article" useGeneratedKeys="true" keyProperty="seq" keyColumn="seq">
         insert into tb_article
         (bbs_no, article_title, article_content, writer, user_id, reg_datetime)
         values
-        ( 1, #{articleTitle}, #{articleContent}, #{writer}, #{writer}, sysdate() )
+        ( 1, #{articleTitle}, #{articleContent}, #{writer}, #{writer},
+        sysdate() )
+        <selectKey resultType="long" keyProperty="seq" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 </mapper>
