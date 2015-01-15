@@ -35,8 +35,5 @@
         <constructor-arg ref="sqlSessionFactory"></constructor-arg>
     </bean>
 
-    <!-- jackson view bean name -->
-    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"></bean>
-
 
 </beans>

@@ -32,7 +32,6 @@
                 <form:label path="writer">writer</form:label>
                 <form:input type="text" class="form-control" path="writer" placeholder="sign your name" />
             </div>
-<<<<<<< HEAD
             <button id="submit" type="button" class="btn btn-primary">Submit</button>
             <button id="cancel" type="button" class="btn btn-default">Cancel</button>
         </form:form>
@@ -56,17 +55,6 @@
 				    alert('err');
 				}
 			    });
-=======
-            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-            <button id="cancel" type="button" class="btn btn-default">Cancel</button>
-        </form:form>
-    </div>
-
-    <script>
-		    $(document).ready(function() {
-			$('#cancel').click(function() {
-			    location.href = "/article/"
->>>>>>> refs/remotes/origin/master
 			});
 		    });
 		</script>
