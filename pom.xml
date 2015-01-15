@@ -11,6 +11,7 @@
         <spring.version>3.1.1.RELEASE</spring.version>
         <org.mybatis.version>3.1.1</org.mybatis.version>
         <org.mybatis.spring.version>1.1.1</org.mybatis.spring.version>
+        <jackson.version>2.4.4</jackson.version>
     </properties>
 
     <dependencies>
@@ -87,6 +88,12 @@
             <scope>test</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
     </dependencies>
 
 

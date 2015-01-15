@@ -4,9 +4,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <!-- default servlet mapping -->
+    <mvc:default-servlet-handler />
+
     <!-- annotatation 기반 설정 사용 선언 -->
     <mvc:annotation-driven />
-
 
     <!-- annotation 기반 컴포넌트 스캔 -->
     <context:component-scan base-package="com.project.anyone" use-default-filters="false">
@@ -14,10 +16,15 @@
     </context:component-scan>
 
 
-
-    <!-- view Resolver 등록 -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <!-- view resolver는 나중에 negotiation 으로 변경하도록 하자 -->
+    <!-- bean name 기반 view Resolver -->
+    <bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
         <property name="order" value="1" />
+    </bean>
+
+    <!-- url 기반 view Resolver -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="2" />
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
