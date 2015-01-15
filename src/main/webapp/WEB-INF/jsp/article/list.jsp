@@ -33,7 +33,7 @@
                             <c:forEach var="columns" items="${articleColumnList}">
                                 <td>${list[columns.column_name]}</td>
                             </c:forEach>
-                        </tr>
+                        </tr> 
                     </c:forEach>
                 </tbody>
             </table>
