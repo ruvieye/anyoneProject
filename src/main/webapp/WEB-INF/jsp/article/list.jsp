@@ -33,11 +33,21 @@
                             <c:forEach var="columns" items="${articleColumnList}">
                                 <td>${list[columns.column_name]}</td>
                             </c:forEach>
-                        </tr> 
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </div>
+
+
+        <div class="pagination">
+            <ul>
+                <c:forEach begin="1" end="${page.pageSize}" varStatus="st">
+                    <li><a href="list?pageNo=${st.index}">${st.index}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
+
 
         <p>
             <button id="btn_post" type="button" class="btn btn-primary">POST</button>

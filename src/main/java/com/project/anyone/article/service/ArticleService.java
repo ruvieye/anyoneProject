@@ -9,12 +9,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.project.anyone.article.model.Article;
+import com.project.anyone.common.helper.Page;
 
 public interface ArticleService {
 
-	public List<HashMap<String, Object>> selectArticleColumnList(Model model);
+	public List<HashMap<String, Object>> selectArticleColumnList(Page page);
 
-	public List<HashMap<String, Object>> selectArticleList(Model model);
+	public int selectArticleListCount();
+
+	public List<HashMap<String, Object>> selectArticleList(Page page);
 
 	public Article selectArticle(long seq);
 

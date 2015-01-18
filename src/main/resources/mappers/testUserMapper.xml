@@ -11,8 +11,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         AND table_schema = 'AnyoneProjectDB'
     </select>
 
-    <select id="selectArticleList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    <select id="selectArticleListCount" resultType="int">
+        SELECT COUNT(1) as cnt FROM tb_article
+    </select>
+
+    <select id="selectArticleList" parameterType="page" resultType="java.util.HashMap">
         SELECT * FROM tb_article
+        LIMIT #{startRowNo} , #{endRowNo}
     </select>
 
     <select id="selectArticle" parameterType="long" resultType="article">

@@ -1,6 +1,8 @@
 package com.project.anyone.article.controller;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +14,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.anyone.article.model.Article;
 import com.project.anyone.article.service.ArticleService;
+import com.project.anyone.common.helper.Page;
 
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
+	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
 	@Autowired
 	private SqlSession sqlSession;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
+	public String list(Page page, Model model) {
 		ArticleService articleService = sqlSession.getMapper(ArticleService.class);
-		model.addAttribute("articleColumnList", articleService.selectArticleColumnList(model));
-		model.addAttribute("articleList", articleService.selectArticleList(model));
+
+		int articleCount = articleService.selectArticleListCount();
+		page.setTotalCount(articleCount);
+		page.init();
+
+		model.addAttribute("articleColumnList", articleService.selectArticleColumnList(page));
+		model.addAttribute("articleList", articleService.selectArticleList(page));
+		model.addAttribute("page", page);
 
 		return "/article/list";
 	}
