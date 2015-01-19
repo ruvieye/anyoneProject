@@ -47,8 +47,12 @@ public class ArticleController {
   }
   
   @RequestMapping(value = "/{seq}", method = RequestMethod.DELETE)
-  public @ResponseBody int delete(@PathVariable("seq") long seq) {
-    return articleService.deleteArticle(seq);
+  public @ResponseBody Article delete(@PathVariable("seq") long seq) {
+    articleService.deleteArticle(seq);
+    Article article = new Article();
+    article.setSeq(seq);
+    return article;
+    
   }
   
   @RequestMapping(value = "/post", method = RequestMethod.GET)
