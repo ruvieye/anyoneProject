@@ -19,7 +19,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- sput http filter -->
+    <!-- PUT http mothod filter -->
     <filter>
         <filter-name>httpPutFormFilter</filter-name>
         <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
