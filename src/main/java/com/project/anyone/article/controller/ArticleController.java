@@ -56,7 +56,7 @@ public class ArticleController {
     return new ModelAndView("/article/post", "article", new Article());
   }
   
-  @RequestMapping(value = "/post", method = RequestMethod.POST)
+  @RequestMapping(value = "/post", method = RequestMethod.POST, produces = "application/json")
   public @ResponseBody long submitPost(Article article) {
     articleService.insertArticle(article);
     return article.getSeq();
