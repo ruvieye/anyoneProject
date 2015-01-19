@@ -12,14 +12,14 @@ import com.project.anyone.article.model.Article;
 import com.project.anyone.common.helper.Page;
 
 public interface ArticleService {
+  
+  public int selectArticleListCount();
 
-	public List<HashMap<String, Object>> selectArticleColumnList(Page page);
-
-	public int selectArticleListCount();
-
-	public List<HashMap<String, Object>> selectArticleList(Page page);
-
-	public Article selectArticle(long seq);
-
-	public int insertArticle(Article article);
+  public List<HashMap<String, Object>> selectArticleColumnList();
+  
+  public List<HashMap<String, Object>> selectArticleList(Page page);
+  
+  public Article selectArticle(long seq);
+  
+  public int insertArticle(Article article);
 }

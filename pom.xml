@@ -49,6 +49,7 @@
             <version>${org.mybatis.version}</version>
         </dependency>
 
+        <!-- mybatis for spring -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>

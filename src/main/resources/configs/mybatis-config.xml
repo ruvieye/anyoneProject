@@ -10,6 +10,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     </typeAliases>
     
     <mappers>
-        <mapper resource="/mappers/testUserMapper.xml" />
+        <mapper resource="/mappers/articleMapper.xml" />
     </mappers>
 </configuration>

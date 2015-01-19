@@ -25,15 +25,16 @@
         <property name="configLocation" value="classpath:/configs/mybatis-config.xml" />
     </bean>
 
+    <!-- sqlSession -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+
     <!-- datasoure의 트랜잭션매니져 설정 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <!-- mybatis sqlSession -->
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg ref="sqlSessionFactory"></constructor-arg>
-    </bean>
 
 
 </beans>

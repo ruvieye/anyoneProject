@@ -1,6 +1,5 @@
 package com.project.anyone.article.controller;
 
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,43 +18,39 @@ import com.project.anyone.common.helper.Page;
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
-	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
-
-	@Autowired
-	private SqlSession sqlSession;
-
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Page page, Model model) {
-		ArticleService articleService = sqlSession.getMapper(ArticleService.class);
-
-		int articleCount = articleService.selectArticleListCount();
-		page.setTotalCount(articleCount);
-		page.init();
-
-		model.addAttribute("articleColumnList", articleService.selectArticleColumnList(page));
-		model.addAttribute("articleList", articleService.selectArticleList(page));
-		model.addAttribute("page", page);
-
-		return "/article/list";
-	}
-
-	@RequestMapping(value = "/{seq}", method = RequestMethod.GET)
-	public String view(Model model, @PathVariable("seq") long seq) {
-		ArticleService articleService = sqlSession.getMapper(ArticleService.class);
-		Article article = articleService.selectArticle(seq);
-		model.addAttribute("article", article);
-		return "/article/view";
-	}
-
-	@RequestMapping(value = "/post", method = RequestMethod.GET)
-	public ModelAndView post(Model model) {
-		return new ModelAndView("/article/post", "article", new Article());
-	}
-
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public @ResponseBody long submitPost(Article article) {
-		ArticleService articleService = sqlSession.getMapper(ArticleService.class);
-		articleService.insertArticle(article);
-		return article.getSeq();
-	}
+  private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
+  
+  @Autowired
+  private ArticleService articleService;
+  
+  @RequestMapping(value = "/list", method = RequestMethod.GET)
+  public String list(Page page, Model model) {
+    
+    int articleCount = articleService.selectArticleListCount();
+    page.setTotalCount(articleCount);
+    page.init();
+    
+    model.addAttribute("articleColumnList", articleService.selectArticleColumnList());
+    model.addAttribute("articleList", articleService.selectArticleList(page));
+    model.addAttribute("page", page);
+    
+    return "/article/list";
+  }
+  
+  @RequestMapping(value = "/{seq}", method = RequestMethod.GET)
+  public String view(Model model, @PathVariable("seq") long seq) {
+    model.addAttribute("article", articleService.selectArticle(seq));
+    return "/article/view";
+  }
+  
+  @RequestMapping(value = "/post", method = RequestMethod.GET)
+  public ModelAndView post(Model model) {
+    return new ModelAndView("/article/post", "article", new Article());
+  }
+  
+  @RequestMapping(value = "/post", method = RequestMethod.POST)
+  public @ResponseBody long submitPost(Article article) {
+    articleService.insertArticle(article);
+    return article.getSeq();
+  }
 }
