@@ -45,4 +45,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
+
+    <delete id="deleteArticle" parameterType="long">
+        DELETE FROM tb_article
+        WHERE seq = #{seq}
+    </delete>
+
+
+    <update id="updateArticle" parameterType="article" >
+        UPDATE tb_article
+        SET article_title = #{articleTitle}
+        ,   article_content = #{articleContent}
+        ,   writer = #{writer}
+        ,   mod_datetime = now()
+        WHERE seq = #{seq}
+    </update>
 </mapper>

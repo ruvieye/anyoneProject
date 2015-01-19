@@ -14,7 +14,7 @@ import com.project.anyone.common.helper.Page;
 public interface ArticleService {
   
   public int selectArticleListCount();
-
+  
   public List<HashMap<String, Object>> selectArticleColumnList();
   
   public List<HashMap<String, Object>> selectArticleList(Page page);
@@ -22,4 +22,8 @@ public interface ArticleService {
   public Article selectArticle(long seq);
   
   public int insertArticle(Article article);
+  
+  public int deleteArticle(long seq);
+  
+  public int updateArticle(Article article);
 }

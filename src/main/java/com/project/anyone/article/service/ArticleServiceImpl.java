@@ -38,4 +38,12 @@ public class ArticleServiceImpl implements ArticleService {
     return articleRepository.insertArticleList(article);
   }
   
+  public int deleteArticle(long seq) {
+    return articleRepository.deleteArticle(seq);
+  }
+  
+  public int updateArticle(Article article) {
+    return articleRepository.updateArticle(article);
+  }
+  
 }

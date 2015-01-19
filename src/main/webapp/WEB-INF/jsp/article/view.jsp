@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <!-- form -->
-        <form:form method="POST" commandName="article" action="/article/post" role="form">
+        <form:form commandName="article" role="form">
             <div class="form-group">
                 <form:label path="articleTitle">title</form:label>
                 <form:input type="text" class="form-control" path="articleTitle" placeholder="write title" />
@@ -33,14 +33,42 @@
                 <form:input type="text" class="form-control" path="writer" placeholder="sign your name" />
             </div>
             <button id="cancel" type="button" class="btn btn-default">Cancel</button>
+            <button id="delete" type="button" class="btn btn-primary">Delete</button>
+            <button id="update" type="button" class="btn btn-primary">Update</button>
         </form:form>
     </div>
 
     <script>
 		    $(document).ready(function() {
-    			$('#cancel').click(function() {
-    			    location.href = "/article/list"
-    			});
+			$('#cancel').click(function() {
+			    location.href = "/article/list"
+			});
+			$('#delete').click(function() {
+			    $.ajax({
+				type : "DELETE",
+				url : "/article/${article.seq}",
+				success : function(data) {
+				    location.href = "/article/list";
+				},
+				error : function() {
+				    alert('err');
+				}
+			    });
+			});
+
+			$('#update').click(function() {
+			    $.ajax({
+				type : "PUT",
+				url : "/article/${article.seq}",
+				data : $("#article").serialize(),
+				success : function(data) {
+				    location.href = "/article/list";
+				},
+				error : function(data) {
+				    alert(data);
+				}
+			    });
+			});
 		    });
 		</script>
 </body>

@@ -29,11 +29,9 @@ public class ArticleController {
     int articleCount = articleService.selectArticleListCount();
     page.setTotalCount(articleCount);
     page.init();
-    
     model.addAttribute("articleColumnList", articleService.selectArticleColumnList());
     model.addAttribute("articleList", articleService.selectArticleList(page));
     model.addAttribute("page", page);
-    
     return "/article/list";
   }
   
@@ -41,6 +39,16 @@ public class ArticleController {
   public String view(Model model, @PathVariable("seq") long seq) {
     model.addAttribute("article", articleService.selectArticle(seq));
     return "/article/view";
+  }
+  
+  @RequestMapping(value = "/{seq}", method = RequestMethod.PUT)
+  public @ResponseBody int updatePost(Article article) {
+    return articleService.updateArticle(article);
+  }
+  
+  @RequestMapping(value = "/{seq}", method = RequestMethod.DELETE)
+  public @ResponseBody int delete(@PathVariable("seq") long seq) {
+    return articleService.deleteArticle(seq);
   }
   
   @RequestMapping(value = "/post", method = RequestMethod.GET)
@@ -53,4 +61,5 @@ public class ArticleController {
     articleService.insertArticle(article);
     return article.getSeq();
   }
+  
 }

@@ -43,7 +43,7 @@
         <div class="pagination">
             <ul>
                 <c:forEach begin="1" end="${page.pageSize}" varStatus="st">
-                    <li><a href="list?pageNo=${st.index}">${st.index}</a></li>
+                    <li><a href="${st.index}">${st.index}</a></li>
                 </c:forEach>
             </ul>
         </div>

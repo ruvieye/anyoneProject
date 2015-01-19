@@ -38,4 +38,12 @@ public class ArticleRepository {
   public int insertArticleList(Article article) {
     return sqlSession.insert(NAMESAPCE + "insertArticle", article);
   }
+  
+  public int deleteArticle(long seq) {
+    return sqlSession.delete(NAMESAPCE + "deleteArticle", seq);
+  }
+  
+  public int updateArticle(Article article) {
+    return sqlSession.update(NAMESAPCE + "updateArticle", article);
+  }
 }
