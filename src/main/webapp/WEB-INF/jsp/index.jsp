@@ -19,12 +19,18 @@
 <body>
     <div class="container">
         <h2>Hello, FaceBook</h2>
-        
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
+
+        <%--
+            [facebook login button]
+            - autologoutlink : 자동 로그인/로그아웃기능 적용
+            - data-scope (or scope) : 로그인동안 필요한 퍼미션 목록 
+              * public_profile (Default) : Provides access to a subset of items that are part of a person's public profile
+              * email - Access to a person's primary email address.
+            - onlogin : 로그인 프로세스 완료후에 호출할 자바스크립트 함수명
+         --%>
+        <fb:login-button data-scope="public_profile,email" autologoutlink="true" onlogin="checkLoginState();"></fb:login-button>
 
         <div id="status"></div>
-
     </div>
 </body>
 </html>
