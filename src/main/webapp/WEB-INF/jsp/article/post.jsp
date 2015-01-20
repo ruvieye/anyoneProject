@@ -49,7 +49,6 @@
 				url : "/article/post",
 				data : $("#article").serialize(),
 				dataType: "json",
-				contentType : "application/json",
 				success : function(json) {
 				    location.href = "/article/" + json.seq;
 				},
