@@ -1,5 +1,8 @@
 package com.project.anyone.article.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +63,15 @@ public class ArticleController {
     return new ModelAndView("/article/post", "article", new Article());
   }
   
-  @RequestMapping(value = "/post", method = RequestMethod.POST, produces = "application/json")
-  public @ResponseBody long submitPost(Article article) {
+  @RequestMapping(value = "/post", method = RequestMethod.POST)
+  public @ResponseBody Map<String, Object> submitPost(Article article) {
     articleService.insertArticle(article);
-    return article.getSeq();
+    
+    Map<String, Object> resultMap = new HashMap<String, Object>();
+    resultMap.put("result", "OK");
+    resultMap.put("seq", article.getSeq());
+    
+    return resultMap;
   }
   
 }

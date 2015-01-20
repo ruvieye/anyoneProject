@@ -48,8 +48,8 @@
 				type : "POST",
 				url : "/article/post",
 				data : $("#article").serialize(),
-				success : function(data) {
-				    location.href = "/article/" + data;
+				success : function(json) {
+				    location.href = "/article/" + json.seq;
 				},
 				error : function() {
 				    alert('err');
