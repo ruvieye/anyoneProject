@@ -1,21 +1,17 @@
 var anyone = {};
-anyone.goPage = function(url, targetId) {
-    if(targetId != undefined){
-	targetId = "#"+targetId;
-    }else{
-	targetId = "#container";
-    }
+anyone.goPage = function(url, targetId, method) {
+    var targetId = (targetId == undefined) ? "#container" : "#" + targetId;
+    var method = (method == undefined) ? "GET" : method;
+
     $.ajax({
-	type : "GET",
+	type : method,
 	url : url,
 	dataType : "html",
 	success : function(data) {
 	    $(targetId).html(data);
 	},
-	error : function() {
-	    alert('err');
+	error : function(data) {
+	    alert('error : ' + data);
 	}
     });
 }
- 
-

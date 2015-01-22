@@ -17,73 +17,73 @@
 </head>
 
 <body>
+    <div id="wrap">
 
-<div id="wrap">
+        <div id="container" class="container">
+            <h1>Hello, world!</h1>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <c:forEach var="columns" items="${articleColumnList}">
+                            <th>${columns.column_name}</th>
+                        </c:forEach>
+                    </thead>
+                    <tbody class="table-hover">
+                        <c:forEach var="list" items="${articleList}">
 
-    <div id="container" class="container">
-        <h1>Hello, world!</h1>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <c:forEach var="columns" items="${articleColumnList}">
-                        <th>${columns.column_name}</th>
+                            <tr id="${list.seq}" class="article_seq">
+                                <c:forEach var="columns" items="${articleColumnList}">
+                                    <td>${list[columns.column_name]}</td>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="pagination">
+                <ul>
+                    <c:forEach begin="1" end="${page.pageSize}" varStatus="st">
+                        <li><a href="javascript:return false;" onclick="movePage('${st.index}');">${st.index}</a></li>
                     </c:forEach>
-                </thead>
-                <tbody class="table-hover">
-                    <c:forEach var="list" items="${articleList}">
+                </ul>
+            </div>
 
-                        <tr id="${list.seq}" class="article_seq">
-                            <c:forEach var="columns" items="${articleColumnList}">
-                                <td>${list[columns.column_name]}</td>
-                            </c:forEach>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+
+            <p>
+                <button id="btn_post" type="button" class="btn btn-primary">POST</button>
+            </p>
         </div>
 
 
-        <div class="pagination">
-            <ul>
-                <c:forEach begin="1" end="${page.pageSize}" varStatus="st">
-                    <li><a href="javascript:return false;" onclick="movePage('${st.index}');">${st.index}</a></li>
-                </c:forEach>
-            </ul>
-        </div>
 
 
-        <p>
-            <button id="btn_post" type="button" class="btn btn-primary">POST</button>
-        </p>
+
+        <input type="text" id="pageNo" name="pageNo" value="${page.pageNo}" />
     </div>
-    
-    
-
-    <input type="text" id="pageNo" name="pageNo" value="${page.pageNo}"/>
-    
-    
-</div>
 
 
     <script>
         $(document).ready(function() {
-            $('#btn_post').click(function() {
-                location.href = "/article/post/"
+      		$('#btn_post').click(function() {
+                var url = "/article/post";
+                anyone.goPage(url);
             });
             
             $('.article_seq').click(function() {
-                var url= "/article/"+$(this).attr('id');
+                var url = "/article/" + $(this).attr('id');
                 anyone.goPage(url);
             });
         });
         
-        function movePage(pageNo){
-            var url= "/article/list?pageNo="+pageNo;
-            anyone.goPage(url, "wrap");
+        function movePage(pageNo) {
+        	var url = "/article/list?pageNo=" + pageNo;
+        	anyone.goPage(url, "wrap");
         }
     </script>
- 
-    
-    
+
+
+
 </body>
 </html>

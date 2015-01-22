@@ -21,57 +21,66 @@ import com.project.anyone.common.helper.Page;
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
-  private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
-  
-  @Autowired
-  private ArticleService articleService;
-  
-  @RequestMapping(value = "/list", method = RequestMethod.GET)
-  public String list(Page page, Model model) {
-    
-    int articleCount = articleService.selectArticleListCount();
-    page.setTotalCount(articleCount);
-    page.init();
-    model.addAttribute("articleColumnList", articleService.selectArticleColumnList());
-    model.addAttribute("articleList", articleService.selectArticleList(page));
-    model.addAttribute("page", page);
-    return "/article/list";
-  }
-  
-  @RequestMapping(value = "/{seq}", method = RequestMethod.GET)
-  public String view(Model model, @PathVariable("seq") long seq) {
-    model.addAttribute("article", articleService.selectArticle(seq));
-    return "/article/view";
-  }
-  
-  @RequestMapping(value = "/{seq}", method = RequestMethod.PUT)
-  public @ResponseBody int updatePost(Article article) {
-    return articleService.updateArticle(article);
-  }
-  
-  @RequestMapping(value = "/{seq}", method = RequestMethod.DELETE)
-  public @ResponseBody Article delete(@PathVariable("seq") long seq) {
-    articleService.deleteArticle(seq);
-    Article article = new Article();
-    article.setSeq(seq);
-    return article;
-    
-  }
-  
-  @RequestMapping(value = "/post", method = RequestMethod.GET)
-  public ModelAndView post(Model model) {
-    return new ModelAndView("/article/post", "article", new Article());
-  }
-  
-  @RequestMapping(value = "/post", method = RequestMethod.POST)
-  public @ResponseBody Map<String, Object> submitPost(Article article) {
-    articleService.insertArticle(article);
-    
-    Map<String, Object> resultMap = new HashMap<String, Object>();
-    resultMap.put("result", "OK");
-    resultMap.put("seq", article.getSeq());
-    
-    return resultMap;
-  }
-  
+	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
+
+	@Autowired
+	private ArticleService articleService;
+
+	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	public String list(Page page, Model model) {
+		int articleCount = articleService.selectArticleListCount();
+		page.setTotalCount(articleCount);
+		page.init();
+		model.addAttribute("articleColumnList", articleService.selectArticleColumnList());
+		model.addAttribute("articleList", articleService.selectArticleList(page));
+		model.addAttribute("page", page);
+		return "/article/list";
+	}
+
+	@RequestMapping(value = "/{seq}", method = RequestMethod.GET)
+	public String view(Model model, @PathVariable("seq") long seq) {
+		model.addAttribute("article", articleService.selectArticle(seq));
+		return "/article/view";
+	}
+
+	@RequestMapping(value = "/{seq}", method = RequestMethod.PUT)
+	public @ResponseBody Map<String, Object> updatePost(Model model, Article article) {
+		articleService.updateArticle(article);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("result", "OK");
+		resultMap.put("seq", article.getSeq());
+
+		return resultMap;
+
+	}
+
+	@RequestMapping(value = "/{seq}", method = RequestMethod.DELETE)
+	public @ResponseBody Map<String, Object> delete(@PathVariable("seq") long seq) {
+		articleService.deleteArticle(seq);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("result", "OK");
+		resultMap.put("seq", seq);
+
+		return resultMap;
+
+	}
+
+	@RequestMapping(value = "/post", method = RequestMethod.GET)
+	public ModelAndView post(Model model) {
+		return new ModelAndView("/article/post", "article", new Article());
+	}
+
+	@RequestMapping(value = "/post", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> submitPost(Article article) {
+		articleService.insertArticle(article);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("result", "OK");
+		resultMap.put("seq", article.getSeq());
+
+		return resultMap;
+	}
+
 }
