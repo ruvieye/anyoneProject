@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/anyoneProject.css">
 <script src="/js/jquery-2.1.3.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/anyoneProject.js"></script>
 </head>
 
 <body>
@@ -66,39 +67,19 @@
 
     <script>
         $(document).ready(function() {
-        $('#btn_post').click(function() {
-            location.href = "/article/post/"
-        });
-        $('.article_seq').click(function() {
-            var seq = $(this).attr('id');
-            //location.href = "/article/" + seq;
-            $.ajax({
-                type : "GET",
-                url : "/article/"+seq,
-                dataType: "html",
-                success : function(data) {
-                    $('#container').html(data);
-                },
-                error : function() {
-                    alert('err');
-                }
+            $('#btn_post').click(function() {
+                location.href = "/article/post/"
             });
             
-        });
+            $('.article_seq').click(function() {
+                var url= "/article/"+$(this).attr('id');
+                anyone.goPage(url);
+            });
         });
         
         function movePage(pageNo){
-         $.ajax({
-            type : "GET",
-            url : "/article/list/?pageNo="+pageNo,
-            dataType: "html",
-            success : function(data) {
-                $('#wrap').html(data);
-            },
-            error : function() {
-                alert('err');
-            }
-            });
+            var url= "/article/list?pageNo="+pageNo;
+            anyone.goPage(url, "wrap");
         }
     </script>
  

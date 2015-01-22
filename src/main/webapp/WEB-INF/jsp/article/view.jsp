@@ -42,8 +42,8 @@
 		    $(document).ready(function() {
 			$('#cancel').click(function() {
 			    var pageNo = $('#pageNo').val();
-			    location.href = "/article/list?pageNo="+pageNo;
-			    
+			    var url= "/article/list?pageNo="+pageNo;
+	            anyone.goPage(url);
 			    
 			});
 			$('#delete').click(function() {
