@@ -41,7 +41,10 @@
     <script>
 		    $(document).ready(function() {
 			$('#cancel').click(function() {
-			    location.href = "/article/list"
+			    var pageNo = $('#pageNo').val();
+			    location.href = "/article/list?pageNo="+pageNo;
+			    
+			    
 			});
 			$('#delete').click(function() {
 			    $.ajax({

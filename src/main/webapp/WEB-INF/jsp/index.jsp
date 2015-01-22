@@ -32,5 +32,81 @@
 
         <div id="status"></div>
     </div>
+
+
+    <div id="content">
+        <ul id="server_list">
+            <li>astweb-www701.svr.hangame.com:8080/index.nhn</li>
+            <li>astweb-www702.svr.hangame.com</li>
+        </ul>
+        <button id="btn392"></button>
+        <div id="div391"></div>
+    </div>
+    
+    <div id="target">target</div>
+    <script>
+		    $(document).ready(function() {
+			$('#server_list li').each(function() {
+			    
+			    var eachUrl = $(this).text();
+			    $.ajax({
+				    type: 'GET',
+				    url: eachUrl,
+				    dataType: "html",
+				    success: function(data){
+				        alert('horray! 200 status code!' + data);
+				        
+				    },
+				    error: function( jqXHR, textStatus, errorThrown) {
+						if(jqXHR.status == 0){
+						    alert('success ' +jqXHR );
+						    
+						    
+						}else {
+						    alert(jqXHR.status + "/ " + eachUrl);
+						}
+					    //alert(jqXHR.status +" / "+ textStatus +" / "+ errorThrown) ;
+					}
+				});
+			});
+			
+		    });
+		</script>
+        
+        <script type="text/javascript">
+$(document).ready(function (){
+    $("#btn392").click(function(){                
+        var url = "http://astweb-www701.svr.hangame.com:8080/index.nhn";
+        
+        var success = function(data){
+            var html = [];
+            /* parse JSON */
+            data = $.parseJSON(data);
+            /* loop through array */
+            $.each(data, function(index, d){            
+                html.push("Manufacturer : ", d.Manufacturer, ", ",
+                          "Sold : ", d.Sold, ", ", 
+                          "Month : ", d.Month, "<br>");
+            });
+
+            $("#div391").html(html.join('')).css("background-color", "orange");
+        };
+        
+        $.ajax({
+          type: 'GET',    
+          url: url,
+          data:{todo:"jsonp"},
+          dataType: "jsonp",
+          crossDomain: true,          
+          cache:false, 
+          success: success,
+          error:function(jqXHR, textStatus, errorThrown){
+            alert(errorThrown);
+          }
+        });
+    });
+});
+</script>
+        
 </body>
 </html>
