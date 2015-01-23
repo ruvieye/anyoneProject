@@ -11,7 +11,7 @@ anyone.goPage = function(url, targetId, method) {
 	    $(targetId).html(data);
 	},
 	error : function(data) {
-	    alert('error : ' + data);
+	    alert('page go error : ' + data);
 	}
     });
 }

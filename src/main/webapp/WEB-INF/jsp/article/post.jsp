@@ -33,12 +33,18 @@
 		data : $("#article").serialize(),
 		dataType : "json",
 		success : function(json) {
-		    location.href = "/article/" + json.seq;
+		    callback(json);
 		},
 		error : function() {
 		    alert('err');
 		}
 	    });
 	});
+
+	function callback(json) {
+	    alert('등록되었습니다');
+	    var url = "/article/" + json.seq;
+	    anyone.goPage(url);
+	}
     });
 </script>

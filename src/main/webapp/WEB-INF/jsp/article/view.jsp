@@ -44,18 +44,23 @@
 
 	$('#update').click(function() {
 	    $.ajax({
-    		type : "PUT",
-    		url : "/article/${article.seq}",
-    		data : $("#article").serialize(),
-    		success : function(data) {
-    		    var url = "/article/21";
-                anyone.goPage(url);
-    		},
-    		error : function(data) {
-    		    alert(data);
-    		}
+		type : "PUT",
+		url : "/article/${article.seq}",
+		data : $("#article").serialize(),
+		success : function(data) {
+		    callback(data);
+		},
+		error : function(data) {
+		    alert(data);
+		}
 	    });
 	});
+
+	function callback(data) {
+	    alert('수정되었습니다');
+	    var url = "/article/" + data.seq;
+	    anyone.goPage(url);
+	}
     });
 </script>
 
