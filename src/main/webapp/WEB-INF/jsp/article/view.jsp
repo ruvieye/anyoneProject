@@ -19,6 +19,8 @@
     <button id="delete" type="button" class="btn btn-primary">Delete</button>
     <button id="update" type="button" class="btn btn-primary">Update</button>
 </form:form>
+
+
 <script>
     $(document).ready(function() {
 	$('#cancel').click(function() {

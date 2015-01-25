@@ -26,6 +26,7 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 
+	// headers = "x-requested-with=XMLHttpRequest"
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String list(Page page, Model model) {
 		int articleCount = articleService.selectArticleListCount();
@@ -46,7 +47,7 @@ public class ArticleController {
 	@RequestMapping(value = "/{seq}", method = RequestMethod.PUT)
 	public @ResponseBody Map<String, Object> updatePost(Model model, Article article) {
 		articleService.updateArticle(article);
-		
+
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("result", "OK");
 		resultMap.put("seq", article.getSeq());

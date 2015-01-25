@@ -1,89 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<title>Bootstrap 101 Template</title>
-<!-- mobile first -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<h1>Hello, world!</h1>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <c:forEach var="columns" items="${articleColumnList}">
+                <th>${columns.column_name}</th>
+            </c:forEach>
+        </thead>
+        <tbody class="table-hover">
+            <c:forEach var="list" items="${articleList}">
 
-<!-- bootstrap + jquery + respond script -->
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/css/anyoneProject.css">
-<script src="/js/jquery-2.1.3.js"></script>
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-<script src="/js/anyoneProject.js"></script>
-</head>
-
-<body>
-    <div id="wrap">
-
-        <div id="container" class="container">
-            <h1>Hello, world!</h1>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <c:forEach var="columns" items="${articleColumnList}">
-                            <th>${columns.column_name}</th>
-                        </c:forEach>
-                    </thead>
-                    <tbody class="table-hover">
-                        <c:forEach var="list" items="${articleList}">
-
-                            <tr id="${list.seq}" class="article_seq">
-                                <c:forEach var="columns" items="${articleColumnList}">
-                                    <td>${list[columns.column_name]}</td>
-                                </c:forEach>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="pagination">
-                <ul>
-                    <c:forEach begin="1" end="${page.pageSize}" varStatus="st">
-                        <li><a href="javascript:return false;" onclick="movePage('${st.index}');">${st.index}</a></li>
+                <tr id="${list.seq}" class="article_seq">
+                    <c:forEach var="columns" items="${articleColumnList}">
+                        <td><a href="/article/${list.seq}">${list[columns.column_name]}</a></td>
                     </c:forEach>
-                </ul>
-            </div>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
 
 
-            <p>
-                <button id="btn_post" type="button" class="btn btn-primary">POST</button>
-            </p>
-        </div>
+<div class="pagination">
+    <ul>
+        <c:forEach begin="1" end="${page.pageSize}" varStatus="st">
+            <li><a href="/article/list?pageNo=${st.index}">${st.index}</a></li>
+        </c:forEach>
+    </ul>
+</div>
 
 
-
-
-
-        <input type="text" id="pageNo" name="pageNo" value="${page.pageNo}" />
-    </div>
-
-
-    <script>
-        $(document).ready(function() {
-      		$('#btn_post').click(function() {
-                var url = "/article/post";
-                anyone.goPage(url);
-            });
-            
-            $('.article_seq').click(function() {
-                var url = "/article/" + $(this).attr('id');
-                anyone.goPage(url);
-            });
-        });
-        
-        function movePage(pageNo) {
-        	var url = "/article/list?pageNo=" + pageNo;
-        	anyone.goPage(url, "wrap");
-        }
-    </script>
+<p>
+    <a href="/article/post"><button id="btn_post" type="button" class="btn btn-primary">POST</button></a>
+</p>
 
 
 
-</body>
-</html>
+
+<script>
+    $(document).pjax('a', '#container');
+    /*
+     $(document).ready(function() {
+
+    $('#btn_post').click(function() {
+        var url = "/article/post";
+        anyone.goPage(url);
+    });
+
+    $('.article_seq').click(function() {
+        var url = "/article/" + $(this).attr('id');
+        anyone.goPage(url);
+    });
+     });
+
+     function movePage(pageNo) {
+    var url = "/article/list?pageNo=" + pageNo;
+    anyone.goPage(url);
+     }
+     */
+</script>
+
