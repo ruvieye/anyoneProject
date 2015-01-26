@@ -2,23 +2,7 @@
 //http://www.javacodegeeks.com/2014/09/angularjs-tutorial-getting-started-with-angularjs.html
 
 (function() {
-    var app = angular.module('article', [ 'ngRoute', 'ngResource' ]);
-
-    app.config(function($routeProvider) {
-	$routeProvider.when('/article/list', {
-	    controller : 'ArticleController',
-	    templateUrl : 'article/list.jsp'
-	}).when('/users/:userId', {
-	    controller : 'UsersByIdCtrl',
-	    templateUrl : 'views/userbyid.html'
-	}).when('/users', {
-	    controller : 'UsersCtrl',
-	    templateUrl : 'views/users.html'
-	}).otherwise({
-	    controller : 'SpaCtrl',
-	    templateUrl : 'views/spahome.html'
-	});
-    });
+    var app = angular.module('article', []);
 
     app.controller('ArticleController', function($scope, $http) {
 	var article = this;
