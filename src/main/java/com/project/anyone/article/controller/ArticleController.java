@@ -7,6 +7,7 @@
 package com.project.anyone.article.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.anyone.article.model.Article;
+import com.project.anyone.article.model.ArticleColumn;
 import com.project.anyone.article.service.ArticleService;
 import com.project.anyone.common.helper.Page;
 
@@ -37,9 +39,9 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 
-	@RequestMapping(value = {"/main"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/test"}, method = RequestMethod.GET)
 	public String main() {
-		return "/article/main";
+		return "/article/test";
 	}
 
 	// headers = "x-requested-with=XMLHttpRequest"
@@ -51,15 +53,32 @@ public class ArticleController {
 	 * @param model the model
 	 * @return the string
 	 */
-	@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
-	public String list(Page page, Model model) {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String article(Model model) {
+		return "/article/main";
+	}
+
+	/**
+	 * 게시판 목록
+	 * List.
+	 *
+	 * @param page the page
+	 * @param model the model
+	 * @return the string
+	 */
+	@RequestMapping(value = "/columns", method = RequestMethod.GET)
+	public @ResponseBody List<ArticleColumn> columns(Page page) {
+		return articleService.selectArticleColumnList();
+
+	}
+
+	@RequestMapping(value = "/articles", method = RequestMethod.GET)
+	public @ResponseBody List<HashMap<String, Object>> articles(Page page) {
 		int articleCount = articleService.selectArticleListCount();
 		page.setTotalCount(articleCount);
 		page.init();
-		model.addAttribute("articleColumnList", articleService.selectArticleColumnList());
-		model.addAttribute("articleList", articleService.selectArticleList(page));
-		model.addAttribute("page", page);
-		return "/article/list";
+		return articleService.selectArticleList(page);
+
 	}
 
 	/**

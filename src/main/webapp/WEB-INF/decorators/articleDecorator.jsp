@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" ng-app="article">
 <head>
 <title>Articles</title>
 <!-- mobile first -->
@@ -12,7 +12,9 @@
 <script src="/js/jquery-2.1.3.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/anyoneProject.js"></script>
-<script src="/js/jquery.pjax.js"></script>
+
+<script src="/js/angular.js"></script>
+<script src="/js/articleApp/articleApp.js"></script>
 </head>
 
 <body>
@@ -25,8 +27,6 @@
         <div id="container" class="container">
             <sitemesh:write property='body' />
         </div>
-
-
         <input type="text" name="pageNo" value="${page.pageNo}" />
     </div>
 </body>

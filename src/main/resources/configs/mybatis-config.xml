@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
     <typeAliases>
         <typeAlias type="com.project.anyone.article.model.Article" alias="article" />
+        <typeAlias type="com.project.anyone.article.model.ArticleColumn" alias="articleColumn" />
         <typeAlias type="com.project.anyone.common.helper.Page" alias="page" />
     </typeAliases>
-    
     <mappers>
         <mapper resource="/mappers/articleMapper.xml" />
     </mappers>
