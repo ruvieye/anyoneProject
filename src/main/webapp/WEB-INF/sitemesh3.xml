@@ -1,3 +1,3 @@
 <sitemesh>
-<mapping path="/*" decorator="/WEB-INF/decorators/articleDecorator.jsp" />
+<mapping path="/article/" decorator="/WEB-INF/decorators/articleDecorator.jsp" />
 </sitemesh>

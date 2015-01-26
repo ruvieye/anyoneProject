@@ -7,8 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <!-- bootstrap + jquery + respond script -->
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/bootstrap/theme/superhero/bootstrap.min.css">
 <link rel="stylesheet" href="/css/anyoneProject.css">
 <script src="/js/jquery-2.1.3.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -19,6 +18,9 @@
 <body>
     <div id="wrap">
         Decorator on! Decorator on! Decorator on! Decorator on! Decorator on!
+        <h3>
+            Site Count is <span id="counter"></span>
+        </h3>
 
         <div id="container" class="container">
             <sitemesh:write property='body' />
@@ -28,5 +30,14 @@
         <input type="text" name="pageNo" value="${page.pageNo}" />
     </div>
 </body>
+<script>
+    var count = 0;
+    $(document).ready(function() {
+	setInterval(function() {
+	    count++;
+	    $('#counter').html(count);
+	}, 1000);
+    });
+</script>
 </html>
 

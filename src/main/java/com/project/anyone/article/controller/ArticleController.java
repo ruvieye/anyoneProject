@@ -1,3 +1,9 @@
+/*
+ * @(#) ArticleController.java 2015. 1. 26 
+ *
+ * Copyright 2014 NHN Entertainment Corp. All rights Reserved. 
+ * NHN Entertainment PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
 package com.project.anyone.article.controller;
 
 import java.util.HashMap;
@@ -18,6 +24,11 @@ import com.project.anyone.article.model.Article;
 import com.project.anyone.article.service.ArticleService;
 import com.project.anyone.common.helper.Page;
 
+/**
+ * The Class ArticleController.
+ *
+ * @author Heesu Sohn
+ */
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
@@ -26,8 +37,21 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 
+	@RequestMapping(value = {"/main"}, method = RequestMethod.GET)
+	public String main() {
+		return "/article/main";
+	}
+
 	// headers = "x-requested-with=XMLHttpRequest"
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	/**
+	 * 게시판
+	 * List.
+	 *
+	 * @param page the page
+	 * @param model the model
+	 * @return the string
+	 */
+	@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
 	public String list(Page page, Model model) {
 		int articleCount = articleService.selectArticleListCount();
 		page.setTotalCount(articleCount);
@@ -38,12 +62,28 @@ public class ArticleController {
 		return "/article/list";
 	}
 
+	/**
+	 * 게시물 조회
+	 * View.
+	 *
+	 * @param model the model
+	 * @param seq the seq
+	 * @return the string
+	 */
 	@RequestMapping(value = "/{seq}", method = RequestMethod.GET)
 	public String view(Model model, @PathVariable("seq") long seq) {
 		model.addAttribute("article", articleService.selectArticle(seq));
 		return "/article/view";
 	}
 
+	/**
+	 * 게시물 수정처리
+	 * Update post.
+	 *
+	 * @param model the model
+	 * @param article the article
+	 * @return the map
+	 */
 	@RequestMapping(value = "/{seq}", method = RequestMethod.PUT)
 	public @ResponseBody Map<String, Object> updatePost(Model model, Article article) {
 		articleService.updateArticle(article);
@@ -56,6 +96,13 @@ public class ArticleController {
 
 	}
 
+	/**
+	 * 게시물 삭제처리
+	 * Delete.
+	 *
+	 * @param seq the seq
+	 * @return the map
+	 */
 	@RequestMapping(value = "/{seq}", method = RequestMethod.DELETE)
 	public @ResponseBody Map<String, Object> delete(@PathVariable("seq") long seq) {
 		articleService.deleteArticle(seq);
@@ -68,11 +115,25 @@ public class ArticleController {
 
 	}
 
+	/**
+	 * 글등록 화면
+	 * Post.
+	 *
+	 * @param model the model
+	 * @return the model and view
+	 */
 	@RequestMapping(value = "/post", method = RequestMethod.GET)
 	public ModelAndView post(Model model) {
 		return new ModelAndView("/article/post", "article", new Article());
 	}
 
+	/**
+	 * 글 등록 처리
+	 * Submit post.
+	 *
+	 * @param article the article
+	 * @return the map
+	 */
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> submitPost(Article article) {
 		articleService.insertArticle(article);
