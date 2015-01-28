@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.project.anyone.mapper.ArticleMapper;
@@ -16,6 +17,7 @@ import com.project.anyone.model.article.ArticleColumn;
 public class ArticleRepository {
 
 	@Autowired
+	@Qualifier("sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;
 
 	public int selectArticleListCount() {

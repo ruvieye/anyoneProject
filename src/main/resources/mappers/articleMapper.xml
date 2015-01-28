@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectArticleListCount" resultType="int">
         SELECT COUNT(1) as cnt FROM tb_article
     </select>
-
+    
     <select id="selectArticleList" parameterType="page" resultType="java.util.HashMap">
         SELECT * FROM tb_article
         LIMIT #{startRowNo} , #{endRowNo}

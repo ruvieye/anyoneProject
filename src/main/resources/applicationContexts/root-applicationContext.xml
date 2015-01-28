@@ -24,8 +24,8 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:/configs/mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath:/mappers/*.xml" />
         <property name="typeAliasesPackage" value="com.project.anyone.model" />
+        <property name="mapperLocations" value="classpath:/mappers/*.xml" />
     </bean>
 
     <!-- sqlSession -->
@@ -33,13 +33,12 @@
         <constructor-arg ref="sqlSessionFactory"></constructor-arg>
     </bean>
 
-
-
-    <!-- 매퍼 인터페이스 scan -->
+    <!-- 매퍼 인터페이스를 어노테이션방식으로 전용할때 scan. anyoneProject는 인터페이스 매퍼와 XML 매퍼를 혼용하여 사용할 예정이다
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.project.anyone.mapper"></property>
+        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate" />
     </bean>
-
+    -->
 
 
     <!-- datasoure의 트랜잭션매니져 설정 -->

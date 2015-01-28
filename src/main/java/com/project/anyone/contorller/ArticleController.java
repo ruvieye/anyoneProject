@@ -39,6 +39,7 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 
+
 	@RequestMapping(value = {"/test"}, method = RequestMethod.GET)
 	public String main() {
 		return "/article/test";
