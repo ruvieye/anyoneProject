@@ -1,4 +1,4 @@
-package com.project.anyone.common.helper;
+package com.project.anyone.model;
 
 public class Page {
 	private int pageNo;

@@ -24,12 +24,23 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:/configs/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:/mappers/*.xml" />
+        <property name="typeAliasesPackage" value="com.project.anyone.model" />
     </bean>
 
     <!-- sqlSession -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory"></constructor-arg>
     </bean>
+
+
+
+    <!-- 매퍼 인터페이스 scan -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.project.anyone.mapper"></property>
+    </bean>
+
+
 
     <!-- datasoure의 트랜잭션매니져 설정 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
