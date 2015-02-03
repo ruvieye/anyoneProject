@@ -33,8 +33,8 @@ import com.project.anyone.service.ArticleService;
  */
 @Controller
 @RequestMapping("/article")
-public class ArticleController {
-	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
+public class CopyOfArticleController {
+	private static final Logger logger = LoggerFactory.getLogger(CopyOfArticleController.class);
 
 	@Autowired
 	private ArticleService articleService;
