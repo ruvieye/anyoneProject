@@ -56,6 +56,7 @@ public class ArticleController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String article(Model model) {
+		logger.debug("여기다 졸 멋진 기능을 만들었다.");
 		return "/article/main";
 	}
 
