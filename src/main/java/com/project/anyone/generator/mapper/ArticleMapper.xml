@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.anyone.generator.client.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.project.anyone.generator.model.Article" >
+    <id column="seq" property="seq" jdbcType="BIGINT" />
+    <result column="bbs_no" property="bbsNo" jdbcType="INTEGER" />
+    <result column="article_title" property="articleTitle" jdbcType="VARCHAR" />
+    <result column="writer" property="writer" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="reg_datetime" property="regDatetime" jdbcType="TIMESTAMP" />
+    <result column="mod_datetime" property="modDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.project.anyone.generator.model.Article" extends="BaseResultMap" >
+    <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seq, bbs_no, article_title, writer, user_id, reg_datetime, mod_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    article_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.project.anyone.generator.model.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.project.anyone.generator.model.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_article
+    where seq = #{seq,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_article
+    where seq = #{seq,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.project.anyone.generator.model.ArticleExample" >
+    delete from tb_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.project.anyone.generator.model.Article" >
+    insert into tb_article (seq, bbs_no, article_title, 
+      writer, user_id, reg_datetime, 
+      mod_datetime, article_content)
+    values (#{seq,jdbcType=BIGINT}, #{bbsNo,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{writer,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{regDatetime,jdbcType=TIMESTAMP}, 
+      #{modDatetime,jdbcType=TIMESTAMP}, #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.anyone.generator.model.Article" >
+    insert into tb_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="bbsNo != null" >
+        bbs_no,
+      </if>
+      <if test="articleTitle != null" >
+        article_title,
+      </if>
+      <if test="writer != null" >
+        writer,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="regDatetime != null" >
+        reg_datetime,
+      </if>
+      <if test="modDatetime != null" >
+        mod_datetime,
+      </if>
+      <if test="articleContent != null" >
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seq != null" >
+        #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="bbsNo != null" >
+        #{bbsNo,jdbcType=INTEGER},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="writer != null" >
+        #{writer,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDatetime != null" >
+        #{regDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modDatetime != null" >
+        #{modDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.project.anyone.generator.model.ArticleExample" resultType="java.lang.Integer" >
+    select count(*) from tb_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_article
+    <set >
+      <if test="record.seq != null" >
+        seq = #{record.seq,jdbcType=BIGINT},
+      </if>
+      <if test="record.bbsNo != null" >
+        bbs_no = #{record.bbsNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleTitle != null" >
+        article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writer != null" >
+        writer = #{record.writer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regDatetime != null" >
+        reg_datetime = #{record.regDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modDatetime != null" >
+        mod_datetime = #{record.modDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articleContent != null" >
+        article_content = #{record.articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_article
+    set seq = #{record.seq,jdbcType=BIGINT},
+      bbs_no = #{record.bbsNo,jdbcType=INTEGER},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      writer = #{record.writer,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      reg_datetime = #{record.regDatetime,jdbcType=TIMESTAMP},
+      mod_datetime = #{record.modDatetime,jdbcType=TIMESTAMP},
+      article_content = #{record.articleContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_article
+    set seq = #{record.seq,jdbcType=BIGINT},
+      bbs_no = #{record.bbsNo,jdbcType=INTEGER},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      writer = #{record.writer,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      reg_datetime = #{record.regDatetime,jdbcType=TIMESTAMP},
+      mod_datetime = #{record.modDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.anyone.generator.model.Article" >
+    update tb_article
+    <set >
+      <if test="bbsNo != null" >
+        bbs_no = #{bbsNo,jdbcType=INTEGER},
+      </if>
+      <if test="articleTitle != null" >
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="writer != null" >
+        writer = #{writer,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="regDatetime != null" >
+        reg_datetime = #{regDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modDatetime != null" >
+        mod_datetime = #{modDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContent != null" >
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where seq = #{seq,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.project.anyone.generator.model.Article" >
+    update tb_article
+    set bbs_no = #{bbsNo,jdbcType=INTEGER},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      writer = #{writer,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      reg_datetime = #{regDatetime,jdbcType=TIMESTAMP},
+      mod_datetime = #{modDatetime,jdbcType=TIMESTAMP},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where seq = #{seq,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.anyone.generator.model.Article" >
+    update tb_article
+    set bbs_no = #{bbsNo,jdbcType=INTEGER},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      writer = #{writer,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      reg_datetime = #{regDatetime,jdbcType=TIMESTAMP},
+      mod_datetime = #{modDatetime,jdbcType=TIMESTAMP}
+    where seq = #{seq,jdbcType=BIGINT}
+  </update>
+</mapper>
