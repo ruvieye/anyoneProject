@@ -35,6 +35,12 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -102,6 +108,17 @@
             <artifactId>sitemesh</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+
+        <!-- testcase를 위해 필요 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        
     </dependencies>
 
 
