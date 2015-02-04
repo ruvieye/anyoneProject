@@ -1,0 +1,39 @@
+<configuration debug="false">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{HH:mm:ss.SSS}] %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/anyoneProject.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            
+            <fileNamePattern>anyoneProject-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+              -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{HH:mm:ss.SSS}] %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    
+    <!-- spring log -->
+    <logger name="org.springframework.context" level="DEBUG"></logger>
+
+    <!-- anyoneProject log -->
+    <logger name="com.project.anyone" level="DEBUG"></logger>
+
+
+    <!-- root log -->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ROLLING" />
+    </root>
+
+</configuration>
