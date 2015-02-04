@@ -56,7 +56,7 @@ public class ArticleController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String article(Model model) {
-		logger.debug("여기다 졸 멋진 기능을 만들었다. + myFeature 라고 선언하고 커밋+ myFeature2 커밋");
+		logger.debug("여기다 졸 멋진 기능을 만들었다. + myFeature 라고 선언하고 커밋+ myFeature2 커밋+ 아무거나 커밋합니다");
 		return "/article/main";
 	}
 

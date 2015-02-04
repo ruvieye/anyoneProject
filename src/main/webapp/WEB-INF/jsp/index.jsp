@@ -42,12 +42,11 @@
         <button id="btn392"></button>
         <div id="div391"></div>
     </div>
-    
+
     <div id="target">target</div>
     <script>
 		    $(document).ready(function() {
 			$('#server_list li').each(function() {
-			    
 			    var eachUrl = $(this).text();
 			    $.ajax({
 				    type: 'GET',
@@ -72,9 +71,10 @@
 			
 		    });
 		</script>
-        
-        <script type="text/javascript">
+
+    <script type="text/javascript">
 $(document).ready(function (){
+  
     $("#btn392").click(function(){                
         var url = "http://astweb-www701.svr.hangame.com:8080/index.nhn";
         
@@ -107,6 +107,6 @@ $(document).ready(function (){
     });
 });
 </script>
-        
+
 </body>
 </html>
