@@ -8,7 +8,7 @@
     <context:component-scan base-package="com.project.anyone" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
-    
+
     <!-- annotatation 기반 설정 사용 선언 -->
     <mvc:annotation-driven />
 
@@ -16,7 +16,67 @@
     <mvc:default-servlet-handler />
 
 
-    <!-- jackson message converter -->
+
+    <!-- view Resolver -->
+   <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="contentNegotiationManager">
+            <bean class="org.springframework.web.accept.ContentNegotiationManager">
+                <constructor-arg>
+                    <bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
+                        <constructor-arg>
+                            <map>
+                                <entry key="json" value="application/json" />
+                                <entry key="xml" value="application/xml" />
+                            </map>
+                        </constructor-arg>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </property>
+    
+        <property name="defaultViews">
+            <list>
+                 <bean id="mappingJacksonJsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+                 <bean id="marshallingView" class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <property name="marshaller" ref="jaxb2Marshaller"></property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+        
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="2" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+
+    <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="packagesToScan">
+            <list>
+                <value>com.project.anyone.model</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- view 
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+    <bean id="xmlView" class="org.springframework.web.servlet.view.xml.MarshallingView">
+        <property name="marshaller" ref="xmlMarshaller"></property>
+    </bean>-->
+
+
+    <!--XStream은 XML 직렬화 라이브러리이지 데이터 바인딩 라이브러리가 아니다. 
+        그러므로 XStream은 제한된 네임스페이스를 지원한다. 그러므로 웹서비스내에서 사용하기에는 별로 알맞지 않다고하니 주석처리하자.
+    <bean id="xmlMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <property name="supportedClasses" value="com.project.anyone.model.article.Article" />
+    </bean>
+     -->
+
+
+
+    <!-- ResponseBody에 대응하는 jackson message converter
     <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
@@ -25,14 +85,18 @@
             </list>
         </property>
     </bean>
+ -->
 
 
-    <!-- url 기반 view Resolver -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="order" value="1" />
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
+
+    <!-- JAXB xml message converter
+    <bean id="xmlConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+        <constructor-arg ref="jaxb2Marshaller" />
+        <property name="supportedMediaTypes" value="application/xml" />
     </bean>
+    </bean>
+-->
+
 
 
 </beans>

@@ -2,6 +2,9 @@ package com.project.anyone.model.article;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Article {
 	private long seq;
 	private int bbsNo;

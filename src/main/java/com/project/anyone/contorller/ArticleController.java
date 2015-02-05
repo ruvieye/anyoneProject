@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,6 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
-
 
 	@RequestMapping(value = {"/test"}, method = RequestMethod.GET)
 	public String main() {
@@ -91,10 +92,9 @@ public class ArticleController {
 	 * @param seq the seq
 	 * @return the string
 	 */
-	@RequestMapping(value = "/{seq}", method = RequestMethod.GET)
-	public String view(Model model, @PathVariable("seq") long seq) {
-		model.addAttribute("article", articleService.selectArticle(seq));
-		return "/article/view";
+	@RequestMapping(value = {"/{seq}", "/{seq}.json", "/{seq}.xml"}, method = RequestMethod.GET)
+	public ModelAndView view(@PathVariable("seq") long seq) {
+		return new ModelAndView("/article/view", "article", articleService.selectArticle(seq));
 	}
 
 	/**

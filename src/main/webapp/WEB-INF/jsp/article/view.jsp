@@ -5,7 +5,6 @@
 
 
 
-<%--
 
 <!-- form -->
 <form:form commandName="article" role="form">
@@ -71,4 +70,3 @@
 	}
     });
 </script>
- --%>
