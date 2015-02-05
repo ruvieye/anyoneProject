@@ -94,6 +94,7 @@ public class ArticleController {
 	 */
 	@RequestMapping(value = {"/{seq}", "/{seq}.json", "/{seq}.xml"}, method = RequestMethod.GET)
 	public ModelAndView view(@PathVariable("seq") long seq) {
+		logger.info("INFOINFOINFOINFOINFOINFOINFOINFOINFOINFOINFOINFOINFOINFO");
 		return new ModelAndView("/article/view", "article", articleService.selectArticle(seq));
 	}
 
