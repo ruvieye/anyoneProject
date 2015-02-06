@@ -16,7 +16,6 @@
     <mvc:default-servlet-handler />
 
 
-
     <!-- view Resolver -->
    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="order" value="1"/>
