@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+
+	<!--보안인증이 필요한 페이지에 대한 설정 설정 -->
+	<http auto-config="true">
+		<intercept-url pattern="/login" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/**" access="ROLE_USER" />
+
+		<!-- 사용자정의 로그인페이지 설정 -->
+		<form-login login-page="/login" 
+			username-parameter="username" password-parameter="password" 
+			authentication-success-handler-ref="loginSuccessHandler"
+			authentication-failure-handler-ref="loginFailureHandler" 
+		/>
+		<logout logout-success-url="/login" />
+	</http>
+
+
+	<!-- 로그인/아웃관련 핸들러빈 -->
+	<beans:bean id="loginSuccessHandler" class="com.project.anyone.security.LoginSuccessHandler"></beans:bean>
+	<beans:bean id="loginFailureHandler" class="com.project.anyone.security.LoginFailureHandler"></beans:bean>
+
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="guest" password="guest" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+
+</beans:beans>
