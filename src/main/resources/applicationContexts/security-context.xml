@@ -8,17 +8,32 @@
 
 
 	<!--보안인증이 필요한 페이지에 대한 설정 설정 -->
-	<http auto-config="true">  
-		<intercept-url pattern="/login" access="ROLE_ANONYMOUS" />
-		<intercept-url pattern="/**" access="ROLE_USER" />
+	<http auto-config="true" use-expressions="true">
+        <!-- 로그인 페이지는 무조건 허용 -->
+		<intercept-url pattern="/login" access="permitAll" />
+        
+        <!-- 개인정보는 fullyAuthentication을 요구하도록 하자 -->
+        <intercept-url pattern="/account" access="hasRole('ROLE_USER') and fullyAuthenticated" />
+        
+        <!-- 나머지는 remember me를 포함한 role_user만 접근 가능 -->
+		<intercept-url pattern="/*" access="hasRole('ROLE_USER')" />
+        
 
 		<!-- 사용자정의 로그인페이지 설정 -->
-		<form-login login-page="/login" 
+		<form-login login-page="/login"  
 			username-parameter="username" password-parameter="password" 
 			authentication-success-handler-ref="loginSuccessHandler"
 			authentication-failure-handler-ref="loginFailureHandler" 
 		/>
-		<logout logout-success-url="/login" />
+        
+        <!-- remember me 설정 -->
+        <remember-me key="anyoneProjectRememberMeKey!@#" 
+                    token-validity-seconds="86400"/>
+        
+        
+		<logout logout-url="/logout" 
+                logout-success-url="/login" />
+                
 	</http>
 
 

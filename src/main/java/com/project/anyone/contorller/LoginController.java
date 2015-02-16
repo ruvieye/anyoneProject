@@ -11,8 +11,20 @@ public class LoginController {
 		return "login";
 	}
 
+
 	@RequestMapping(method = RequestMethod.GET, value = "/home")
 	public String home() {
 		return "home";
 	}
+
+	@RequestMapping("/error/accessDenied")
+	public String accessDenied() {
+		return "/error/accessDenied";
+	}
+	
+	@RequestMapping("/account")
+	public String account() {
+		return "/account/form";
+	}
+
 }

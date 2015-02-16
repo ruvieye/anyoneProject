@@ -4,12 +4,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>account</title>
 </head>
 <body>
 <h1>
-	Hello world!
-	헬로월드   
+	계정정보
 </h1>
 
 
