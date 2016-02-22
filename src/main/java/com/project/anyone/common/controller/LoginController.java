@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginController {
-  @Autowired
-  private SqlSession sqlSession;
-  
-  @RequestMapping(value = "/index", method = RequestMethod.GET)
-  public String hello(Locale locale, Model model) {
-    
-    return "index";
-  }
-  
+	@Autowired
+	private SqlSession sqlSession;
+
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String hello(Locale locale, Model model) {
+		System.out.println("콜미");
+		return "index";
+	}
+
 }
