@@ -1,3 +1,5 @@
+package pattern.Mediator.Sample;
+
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.event.ItemListener;
@@ -6,16 +8,16 @@ import java.awt.event.ItemEvent;
 public class ColleagueCheckbox extends Checkbox implements ItemListener, Colleague {
     private Mediator mediator;
     public ColleagueCheckbox(String caption, CheckboxGroup group, boolean state) {  
-// »ý¼ºÀÚ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         super(caption, group, state);
     }
-    public void setMediator(Mediator mediator) {           // MediatorÀ» ÀúÀå
+    public void setMediator(Mediator mediator) {           // Mediatorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.mediator = mediator;
     }
-    public void setColleagueEnabled(boolean enabled) {    // Mediator¿¡¼­ À¯È¿/¹«È¿¸¦ Áö½Ã
+    public void setColleagueEnabled(boolean enabled) {    // Mediatorï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿/ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         setEnabled(enabled);
     }
-    public void itemStateChanged(ItemEvent e) {           // »óÅÂ°¡ ¹Ù²î¸é Mediator¿¡°Ô ÅëÁö
+    public void itemStateChanged(ItemEvent e) {           // ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Ù²ï¿½ï¿½ Mediatorï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mediator.colleagueChanged();
     }
 }

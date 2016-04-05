@@ -1,3 +1,5 @@
+package pattern.Mediator.Sample;
+
 import java.awt.Frame;
 import java.awt.Label;
 import java.awt.Color;
@@ -14,16 +16,16 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
     private ColleagueButton buttonOk;
     private ColleagueButton buttonCancel;
 
-    // »ý¼ºÀÚ
-    // ColleagueµéÀ» »ý¼ºÇÏ°í, ¹èÄ¡ÇÑ ÈÄ¿¡ Ç¥½Ã¸¦ ½ÇÇàÇÑ´Ù
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // Colleagueï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ä¿ï¿½ Ç¥ï¿½Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
     public LoginFrame(String title) {
         super(title);
         setBackground(Color.lightGray);
-        // ·¹ÀÌ¾Æ¿ô ¸Å´ÏÀú¸¦ »ç¿ëÇØ¼­ 4X2ÀÇ ±×¸®µå¸¦ ¸¸µç´Ù
+        // ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ 4X2ï¿½ï¿½ ï¿½×¸ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½
         setLayout(new GridLayout(4, 2));
-        // ColleagueµéÀÇ »ý¼º
+        // Colleagueï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         createColleagues();
-        // ¹èÄ¡
+        // ï¿½ï¿½Ä¡
         add(checkGuest);
         add(checkLogin);
         add(new Label("Username:"));
@@ -32,16 +34,16 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
         add(textPass);
         add(buttonOk);
         add(buttonCancel);
-        // À¯È¿/¹«È¿ÀÇ ÃÊ±â ÁöÁ¤
+        // ï¿½ï¿½È¿/ï¿½ï¿½È¿ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½
         colleagueChanged();
-        // Ç¥½Ã
+        // Ç¥ï¿½ï¿½
         pack();
         show();
     }
 
-    // ColleagueµéÀ» »ý¼ºÇÑ´Ù
+    // Colleagueï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
     public void createColleagues() {
-        // »ý¼º
+        // ï¿½ï¿½ï¿½ï¿½
         CheckboxGroup g = new CheckboxGroup();
         checkGuest = new ColleagueCheckbox("Guest", g, true);
         checkLogin = new ColleagueCheckbox("Login", g, false);
@@ -50,14 +52,14 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
         textPass.setEchoChar('*');
         buttonOk = new ColleagueButton("OK");
         buttonCancel = new ColleagueButton("Cancel");
-        // MediatorÀÇ ¼¼Æ®
+        // Mediatorï¿½ï¿½ ï¿½ï¿½Æ®
         checkGuest.setMediator(this);
         checkLogin.setMediator(this);
         textUser. setMediator(this);
         textPass. setMediator(this);
         buttonOk. setMediator(this);
         buttonCancel.setMediator(this);
-        // ListenerÀÇ ¼¼Æ®
+        // Listenerï¿½ï¿½ ï¿½ï¿½Æ®
         checkGuest.addItemListener(checkGuest);
         checkLogin.addItemListener(checkLogin);
         textUser.addTextListener(textUser);
@@ -66,19 +68,19 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
         buttonCancel.addActionListener(this);
     }
 
-    // Colleage¿¡¼­ÀÇ ÅëÁö·Î ColleageÀÇ À¯È¿/¹«È¿¸¦ ÆÇÁ¤ÇÑ´Ù 
+    // Colleageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Colleageï¿½ï¿½ ï¿½ï¿½È¿/ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ 
     public void colleagueChanged() {                          
-        if (checkGuest.getState()) { 				// Guest ¸ðµå
+        if (checkGuest.getState()) { 				// Guest ï¿½ï¿½ï¿½
             textUser.setColleagueEnabled(false);                
             textPass.setColleagueEnabled(false);                
             buttonOk.setColleagueEnabled(true);               
-        } else { 						// Login ¸ðµå
+        } else { 						// Login ï¿½ï¿½ï¿½
             textUser.setColleagueEnabled(true);                
             userpassChanged();                              
         }                                                   
     }                                                       
-    // textUser ¶Ç´Â textPassÀÇ º¯°æÀÌ ÀÖ¾ú´Ù
-    // °¢ ColleageÀÇ À¯È¿/¹«È¿¸¦ ÆÇÁ¤ÇÑ´Ù
+    // textUser ï¿½Ç´ï¿½ textPassï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ Colleageï¿½ï¿½ ï¿½ï¿½È¿/ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
     private void userpassChanged() {
         if (textUser.getText().length() > 0) {
             textPass.setColleagueEnabled(true);

@@ -1,3 +1,5 @@
+package pattern.Mediator.Sample;
+
 import java.awt.*;
 import java.awt.event.*;
 

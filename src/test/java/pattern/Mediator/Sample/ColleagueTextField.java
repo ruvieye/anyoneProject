@@ -1,3 +1,5 @@
+package pattern.Mediator.Sample;
+
 import java.awt.TextField;
 import java.awt.Color;
 import java.awt.event.TextListener;
@@ -5,17 +7,17 @@ import java.awt.event.TextEvent;
 
 public class ColleagueTextField extends TextField implements TextListener, Colleague {
     private Mediator mediator;
-    public ColleagueTextField(String text, int columns) {   // »ý¼ºÀÚ
+    public ColleagueTextField(String text, int columns) {   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         super(text, columns);
     }
-    public void setMediator(Mediator mediator) {         // MediatorÀ» ÀúÀå
+    public void setMediator(Mediator mediator) {         // Mediatorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.mediator = mediator;
     }
-    public void setColleagueEnabled(boolean enabled) {   // Mediator¿¡¼­ À¯È¿/¹«È¿¸¦ Áö½Ã
+    public void setColleagueEnabled(boolean enabled) {   // Mediatorï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿/ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         setEnabled(enabled);
         setBackground(enabled ? Color.white : Color.lightGray);
     }
-    public void textValueChanged(TextEvent e) {          // ¹®ÀÚ¿­ÀÌ º¯ÇÏ¸é Mediator¿¡°Ô ÅëÁö
+    public void textValueChanged(TextEvent e) {          // ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ Mediatorï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mediator.colleagueChanged();
     }
 }

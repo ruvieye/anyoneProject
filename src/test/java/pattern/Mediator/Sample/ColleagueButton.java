@@ -1,3 +1,5 @@
+package pattern.Mediator.Sample;
+
 import java.awt.Button;
 
 public class ColleagueButton extends Button implements Colleague {
@@ -5,10 +7,10 @@ public class ColleagueButton extends Button implements Colleague {
     public ColleagueButton(String caption) {
         super(caption);
     }
-    public void setMediator(Mediator mediator) {            // MediatorÀ» ÀúÀå
+    public void setMediator(Mediator mediator) {            // Mediatorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.mediator = mediator;
     }
-    public void setColleagueEnabled(boolean enabled) {      // Mediator¿¡¼­ À¯È¿/¹«È¿¸¦ Áö½Ã
+    public void setColleagueEnabled(boolean enabled) {      // Mediatorï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿/ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         setEnabled(enabled);
     }
 }
