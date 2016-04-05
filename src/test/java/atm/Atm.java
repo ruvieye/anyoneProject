@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import atm.exception.AtmException;
 import atm.exception.AtmExceptionType;
+import atm.input.AtmInput;
 import atm.screen.AtmScreen;
 
 /**
@@ -23,8 +24,14 @@ public class Atm {
 
 	private AtmScreen atmScreen;
 
+	private AtmInput atmInput;
+
 	public void setAtmScreen(AtmScreen atmScreen) {
 		this.atmScreen = atmScreen;
+	}
+
+	public void setAtmInput(AtmInput atmInput) {
+		this.atmInput = atmInput;
 	}
 
 	/**
@@ -34,9 +41,15 @@ public class Atm {
 
 		LOG.debug("ATM 시스템을 구동합니다...");
 		try {
+
+			// 상태를 체크하고
 			checkSelfStatus();
+
+			// 메세지를 출력하고
 			atmScreen.display(MessageState.STATE_WELCOME);
-			//
+
+			// 사용자의 입력 스캔을 받는다
+			atmInput.input();
 
 		} catch (AtmException atme) {
 			LOG.error("ATM 시스템에 문제가 있습니다.{}", atme.getMessage());
